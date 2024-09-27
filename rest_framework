@@ -12,7 +12,7 @@ REST_FRAMEWORK = {
 
 
 
-Create Model in model.py
+Create Model in model.py of your app folder.
 
 from django.db import models
 
@@ -22,3 +22,13 @@ class Message(models.Model):
 
     def __str__(self):
         return self.content
+
+
+Create a serializers.py file in your app’s directory with the following:
+from rest_framework import serializers
+from .models import Message
+
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = '__all__'
