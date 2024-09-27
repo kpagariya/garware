@@ -32,3 +32,34 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = '__all__'
+
+
+
+Add below views in views.py
+from django.shortcuts import render
+
+from rest_framework import generics, permissions
+from .models import Message
+from .serializers import MessageSerializer
+
+class MessageCreateView(generics.CreateAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    http_method_names = ['post']
+
+class MessageListView(generics.ListAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    http_method_names = ['get']
+
+
+
+Create urls.py into application folder and add below URLs
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('messages/', views.MessageListView.as_view(), name='message-list'),
+    path('messages/create/', views.MessageCreateView.as_view(), name='message-create'),
+]
