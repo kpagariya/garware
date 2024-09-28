@@ -70,7 +70,9 @@ Create user using shell
 $python manage.py shell
 
 Once shell is open you can create a new user with the following
-from django.contrib.auth.models import Useruser = User.objects.create_user('username', 'email@example.com', 'password')user.save()
+from django.contrib.auth.models import User
+user = User.objects.create_user('username', 'email@example.com', 'password')
+user.save()
 
 Note: username and password replace with actual password.
 
